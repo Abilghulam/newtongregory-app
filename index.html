@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Polinomial Newton-Gregory</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔮 Prediksi Data Metode Polinomial Newton-Gregory</h1>
+        </div>
+        
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">📊</div>
+                    Input Data
+                </div>
+                
+                <div class="data-info">
+                    <strong>Status Data:</strong>
+                    <span class="status-indicator status-none"></span>
+                    <span id="dataStatus">File: tidak ada</span><br>
+                    <strong>Jumlah Data:</strong> <span id="dataCount">0</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Upload File Data:</label>
+                    <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📁</div>
+                        <div>Klik untuk memilih file atau drag & drop</div>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">Support: .csv, .txt, .xlsx</div>
+                    </div>
+                    <input type="file" id="fileInput" style="display: none;" accept=".csv,.txt,.xlsx">
+                </div>
+                
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn" onclick="selectFile()">
+                        📂 Pilih File
+                    </button>
+                    <button class="btn btn-secondary" onclick="createTable()">
+                        📋 Buat Tabel
+                    </button>
+                </div>
+                
+                <table class="data-table" id="dataTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>X</th>
+                            <th>Y</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+                <div style="margin-top:10px; display:flex; gap:10px;">
+                    <button class="btn" type="button" onclick="addRow()">➕ Tambah Baris</button>
+                    <button class="btn btn-secondary" type="button" onclick="removeRow()">➖ Hapus Baris</button>
+                </div>
+            </div>
+            
+            <!-- Prediction Section -->
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">🎯</div>
+                    Prediksi
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Nilai x untuk prediksi:</label>
+                    <input type="number" class="form-input" id="predictionInput" placeholder="Masukkan nilai x..." step="0.01">
+                </div>
+                
+                <button class="btn pulse" onclick="calculatePrediction()" style="width: 100%; margin: 20px 0;">
+                    🚀 Hitung Prediksi
+                </button>
+                
+                <div class="form-group">
+                    <label class="form-label">Hasil Prediksi:</label>
+                    <div class="prediction-result" id="predictionResult">
+                        Hasil prediksi akan ditampilkan di sini...
+                        📈 Menunggu input data dan nilai prediksi
+                    </div>
+                    <!-- 2. Tambahkan tombol Ekspor PDF -->
+                    <button class="btn btn-secondary" style="margin-top:10px;" onclick="exportPDF()">
+                        🖨️ Ekspor PDF
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Chart Section -->
+            <div class="chart-section">
+                <div class="card">
+                    <div class="card-title">
+                        <div class="icon">📈</div>
+                        Grafik Data dan Prediksi
+                    </div>
+                    <div class="chart-container" id="chartContainer">
+                        <div>
+                            <div style="font-size: 3rem; margin-bottom: 20px;">📊</div>
+                            <div>Grafik akan ditampilkan setelah data diinput dan prediksi dihitung</div>
+                            <div style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                                Visualisasi interaktif dengan data points dan kurva prediksi
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
