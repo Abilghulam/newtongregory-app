@@ -106,7 +106,7 @@ let dataPoints = [];
             `;
             
             updateDataStatus(`${dataPoints.length} data points loaded`, dataPoints.length);
-            updateChart();
+            updateChart(x, result);
         }
         
         // Melakukan interpolasi Newton-Gregory (atau Lagrange jika >2 titik)
@@ -139,7 +139,7 @@ let dataPoints = [];
         }
         
         // Mengupdate grafik visualisasi data dan kurva prediksi
-        function updateChart() {
+        function updateChart(predictedX = null, predictedY = null) {
             const chartContainer = document.getElementById('chartContainer');
             
             if (dataPoints.length === 0) {
@@ -153,11 +153,11 @@ let dataPoints = [];
             }
             
             // Buat grafik SVG
-            createSVGChart(chartContainer, dataPoints);
+            createSVGChart(chartContainer, dataPoints, predictedX, predictedY);
         }
         
         // Membuat grafik SVG dari data dan kurva prediksi
-        function createSVGChart(container, points) {
+        function createSVGChart(container, points, predictedX = null, predictedY = null) {
             const width = 800;
             const height = 400;
             const margin = { top: 40, right: 40, bottom: 60, left: 60 };
@@ -246,6 +246,20 @@ let dataPoints = [];
                     </text>
                 `;
             });
+
+            // Jika titik prediksi tersedia, gambarkan titiknya
+            if (predictedX !== null && predictedY !== null) {
+                const cx = scaleX(predictedX);
+                const cy = scaleY(predictedY);
+                svg += `
+                    <circle cx="${cx}" cy="${cy}" r="10" fill="red" stroke="white" stroke-width="3">
+                        <animate attributeName="r" values="10;14;10" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="${cx}" y="${cy - 15}" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="red">
+                        (${predictedX.toFixed(2)}, ${predictedY.toFixed(2)})
+                    </text>
+                `;
+            }
             
             // Draw axes
             svg += `
