@@ -301,6 +301,10 @@ let dataPoints = [];
                     ${svg}
                     <div style="margin-top: 20px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
                         <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 20px; height: 20px; background: linear-gradient(135deg, red); border-radius: 50%; border: 3px solid white;"></div>
+                            <span style="color: #2c3e50; font-weight: 500;">Data Results</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
                             <div style="width: 20px; height: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; border: 3px solid white;"></div>
                             <span style="color: #2c3e50; font-weight: 500;">Data Points</span>
                         </div>
